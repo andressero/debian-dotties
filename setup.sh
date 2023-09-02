@@ -50,7 +50,19 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 # Set up plymouth theme
 # Create a program that modifies /etc/default/grub so it can handle plymouths
-plymouth-set-default-theme emerald
+# plymouth-set-default-theme emerald
 
 # Hide some applications
+echo "Hiding some applications"
+mkdir -p ~/.local/share/applications
+cd /usr/share/applications/
+cp im-config.desktop nm-connection-editor.desktop org.gnome.Terminal.desktop org.libreoffice.LibreOffice.base.desktop org.libreoffice.LibreOffice.draw.desktop org.libreoffice.LibreOffice.math.desktop yelp.desktop  ~/.local/share/applications
 
+for i in *
+do
+	if test -f "$i"
+	then
+		echo "NoDisplay=true" >> $i
+		echo ""
+	fi
+done
